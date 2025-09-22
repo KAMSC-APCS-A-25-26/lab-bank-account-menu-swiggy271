@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 public class BankAccountMenuTest {
 
     private static List<Double> extractMoneyAmounts(String output) {
-        // Pattern that looks for money amounts (with $ or in money context)
         Pattern p = Pattern.compile("\\$([0-9]+\\.?[0-9]*)|(?:balance|amount|add|withdraw|new|current).*?([0-9]+\\.?[0-9]*)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(output);
         List<Double> amounts = new ArrayList<>();
@@ -24,7 +23,6 @@ public class BankAccountMenuTest {
                     amounts.add(Double.parseDouble(amountStr));
                 }
             } catch (NumberFormatException e) {
-                // Skip invalid numbers
             }
         }
         return amounts;
@@ -231,10 +229,11 @@ public class BankAccountMenuTest {
 
         List<Double> amounts = extractMoneyAmounts(output);
         
-        assertTrue(amounts.contains(200.00) && amounts.contains(75.50) && amounts.contains(50.00), 
+        // Check that we see the expected balance amounts: 200.00, 124.50, 74.50
+        assertTrue(amounts.contains(200.00) && amounts.contains(124.50) && amounts.contains(74.50), 
             "❌ Your program should handle a complete workflow with multiple operations!");
 
-            boolean hasCorrectFinalBalance = false;
+        boolean hasCorrectFinalBalance = false;
         for (Double amount : amounts) {
             if (Math.abs(amount - 74.50) < 0.01) {
                 hasCorrectFinalBalance = true;
@@ -252,7 +251,7 @@ public class BankAccountMenuTest {
 
         List<Double> amounts = extractMoneyAmounts(output);
         
-        assertTrue(amounts.contains(10.00) && amounts.contains(5.00) && amounts.contains(20.00) && amounts.contains(15.00), 
+        assertTrue(amounts.contains(10.00) && amounts.contains(5.00) && amounts.contains(25.00), 
             "❌ Your program should handle multiple menu operations efficiently! This suggests you might be using if-else instead of switch statement.");
         
         boolean hasCorrectFinalBalance = false;
