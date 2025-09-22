@@ -22,7 +22,11 @@ public class BankAccountMenu {
                     // deposit
                     System.out.println("Enter amount to add:  ");
                     change = scan.nextDouble();
-                    balance += change;
+                    if(change >=0)
+                    {
+                        balance += change;
+                        System.out.println("New balance:  $" + balance);
+                    }
                     break;
                 case 2:
                     // withdrawal
@@ -35,11 +39,12 @@ public class BankAccountMenu {
                     else
                     {
                         balance -= change;
+                        System.out.println("New balance:  $" + balance);
                     }
                     break;
                 case 3:
                     // check balance
-                    System.out.println("Your balance:  " + balance);
+                    System.out.println("Your balance:  $" + balance);
                     break;
                 case 4:
                     // end program
