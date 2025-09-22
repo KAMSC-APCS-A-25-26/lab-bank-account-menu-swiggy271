@@ -2,12 +2,53 @@ import java.util.Scanner;
 
 public class BankAccountMenu {
     public static void main(String[] args) {
-        // TODO: Implement the bank account menu
-        // 1. Create a double variable for balance
-        // 2. Create a while loop for the menu
-        // 3. Display the menu options
-        // 4. Use Scanner to read user input
-        // 5. Use switch statement to handle menu choices
-        // 6. Implement add money, withdraw money, check balance, and exit functionality
+
+        // program setup: initialize variables and scanner
+        Scanner scan = new Scanner(System.in);
+        int menuChoice;
+        double balance = 0, change;
+        boolean running = true;
+
+        // continues the program until the user asks not to
+        while (running)
+        {
+            // displays options and reads user choice
+            System.out.print("\n\nBank Account Menu\n1. Deposit\n2. Withdraw\n3. Print Balance\n4. Exit\nEnter your choice:  ");
+            menuChoice = scan.nextInt();
+
+            switch(menuChoice)
+            {
+                case 1:
+                    // deposit
+                    System.out.println("Enter amount to add:  ");
+                    change = scan.nextDouble();
+                    balance += change;
+                    break;
+                case 2:
+                    // withdrawal
+                    System.out.println("Enter amount to withdraw:  ");
+                    change = scan.nextDouble();
+                    if (change > balance)
+                    {
+                        System.out.println("Err: Invalid Funds");
+                    }
+                    else
+                    {
+                        balance -= change;
+                    }
+                    break;
+                case 3:
+                    // check balance
+                    System.out.println("Your balance:  " + balance);
+                    break;
+                case 4:
+                    // end program
+                    System.out.println("Goodbye!");
+                    running = false;
+                    break;
+            }
+
+        }
+
     }
 }
